@@ -13,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 
@@ -27,7 +27,24 @@ import net.xenocubium.derver.group.Group;
 public class MainListener implements Listener {
 	
 	@EventHandler
-	public void onExplode(ExplosionPrimeEvent event) {
+	public void onEntityExplode(EntityExplodeEvent event) {
+		Location loc = event.getLocation();
+
+		if (loc.getWorld().getEnvironment() != World.Environment.NORMAL) {
+			return;
+		}
+		int x = loc.getChunk().getX();
+		int z = loc.getChunk().getZ();
+		 
+		Group groupObj = (new Group());
+		ChunkThing cThing = new ChunkThing(groupObj);
+		
+		String group = cThing.getChunk(x,z);
+		
+		if (group == null) {
+			return;
+		};
+		
 		event.setCancelled(true);
 	}
 	
