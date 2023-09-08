@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import net.kyori.adventure.text.Component;
+import net.xenocubium.derver.group.Group;
 
 public class GroupInfo implements CommandExecutor {
 	
@@ -27,6 +28,13 @@ public class GroupInfo implements CommandExecutor {
 		Group groupObj = (new Group());
 		
 		String group = args[0];
+		
+		List<String> groups = groupObj.getAllGroups();
+    	
+    	if (!groups.contains(group)) {
+			sender.sendMessage(Component.text("§4Group does not exist!"));
+			return true; 
+		}
 		
     	List<String> groupInfo = groupObj.getGroup(group);
     	
