@@ -46,6 +46,18 @@ public class Group {
     	return groups;
 	}
 	
+	public List<String> getAllGroups() {
+    	Set<String> data = config.getKeys(false);
+    	
+    	ArrayList<String> groups = new ArrayList<String>();
+    	
+    	for (String entry : data) {
+        	groups.add(entry);
+    	}
+    	
+    	return groups;
+	}
+	
 	public void deleteGroup(String str) {
 		config.set(str, null);
 		
