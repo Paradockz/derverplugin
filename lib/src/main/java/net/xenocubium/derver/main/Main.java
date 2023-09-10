@@ -24,7 +24,6 @@ public class Main extends JavaPlugin {
     public void onEnable() {    	
         Bukkit.getPluginManager().registerEvents(new MainListener(), this);
     	mainGen.renderImage();
-    	this.getCommand("getpower").setExecutor(new GetPower());
     	this.getCommand("power").setExecutor(new Power());
     	this.getCommand("claim").setExecutor(new ClaimChunk());
     	this.getCommand("newgroup").setExecutor(new NewGroup());
