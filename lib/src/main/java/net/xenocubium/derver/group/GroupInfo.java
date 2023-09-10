@@ -35,6 +35,23 @@ public class GroupInfo implements CommandExecutor {
 			sender.sendMessage(Component.text("§4Group does not exist!"));
 			return true; 
 		}
+    	
+    	File powerFile = new File("power.yaml");
+    	if (!powerFile.exists()) {
+    		try {
+    			powerFile.createNewFile();
+    		} catch (IOException e) {
+                e.printStackTrace();
+            }
+    	}
+    	
+    	YamlConfiguration config = YamlConfiguration.loadConfiguration(powerFile);
+
+    	int amount = config.getInt(group, 0);
+    	
+    	sender.sendMessage(Component.text("§6This are the informations for §c§l" + group + "§6:"));
+    	
+    	sender.sendMessage(Component.text("§6Score: §c§l" +  amount));
 		
     	List<String> groupInfo = groupObj.getGroup(group);
     	
@@ -46,9 +63,9 @@ public class GroupInfo implements CommandExecutor {
     		groupInfo.set(i,(player == null) ? "Unknown" : player.getName());
     	}
     	
-    	String groupConcat = String.join("\n- ", groupInfo);
+    	String groupConcat = String.join("\n§6- §c§l", groupInfo);
     	
-    	sender.sendMessage(Component.text("Group " + group + " has the following members:\n- " +  groupConcat));
+    	sender.sendMessage(Component.text("§6Members:\n- " +  groupConcat));
 		return true;
 	}
 
